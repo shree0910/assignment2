@@ -1,0 +1,155 @@
+1.Roman to Integer.
+class Solution {
+    public int romanToInt(String s) {
+        int ans=0,num=0;
+        for (int i=s.length()-1;i>=0;i--){
+            switch(s.charAt(i)){
+                case 'I':num=1; break;
+                case 'V':num=5; break;
+                case 'X':num=10; break;
+                case 'L':num=50; break;
+                case 'C':num=100; break;
+                case 'D':num=500; break;
+                case 'M':num=1000; break;
+            }
+            if (4*num<ans) ans-=num;
+            else ans += num;
+        }
+        return ans;
+        
+    }
+}
+
+
+
+2.Longest Common Prefix.
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String ans="";
+        int n= strs.length;
+
+        int min= Integer.MAX_VALUE;
+        for(int i=0;i<n;i++){
+
+            int len= strs[i].length();
+            min= Math.min(min,len);
+        }
+
+
+        for(int i=0;i<min;i++){
+
+            char x1= strs[0].charAt(i);
+            boolean possible=true;
+            for(int j=1;j<n;j++){
+
+                if(strs[j].charAt(i)!=x1){
+                    possible=false;
+                    break;
+                }
+            }
+            if(possible){
+                ans+=x1;
+            }
+            else{
+                break;
+            }
+        }
+        return ans;
+        
+    }
+}
+
+
+3.Valid Palindrome.
+class Solution {
+    public boolean isPalindrome(String s) {
+        int l = 0;
+    int r = s.length() - 1;
+
+    while (l < r) {
+      while (l < r && !Character.isLetterOrDigit(s.charAt(l)))
+        ++l;
+      while (l < r && !Character.isLetterOrDigit(s.charAt(r)))
+        --r;
+      if (Character.toLowerCase(s.charAt(l)) != Character.toLowerCase(s.charAt(r)))
+        return false;
+      ++l;
+      --r;
+    }
+
+    return true;
+        
+    }
+}
+
+
+4.Valid Anagram.
+class Solution {            
+public:
+    bool isAnagram(string s, string t) {
+        if(s.length() != t.length()){
+            return false;
+        }
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        if(s == t){
+            return true;  
+        }
+        return false;
+    }
+};
+
+
+
+5.Reverse words in a string.
+lass Solution {
+    public String reverseWords(String s) {
+       int n=s.length(),i=n-1,j=n-1;
+    string ans;
+    while(i>=0)
+    {
+        if(s[i]==' ')
+        {
+            if(i!=j) ans=ans+s.substr(i+1,j-i)+' ';
+            i--; j=i;
+        }
+        else i--;
+    }
+    if(i!=j) ans=ans+s.substr(i+1,j-i);
+    else if(ans.back()==' ') ans.pop_back();
+    return ans; 
+    }
+}
+
+
+
+7.Longest Valid Parentheses.
+class Solution {
+    public int longestValidParentheses(String s) {
+        int maxans = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        for(int i=0; i<s.length(); i++)
+        {
+            if(s.charAt(i)=='(')
+            {
+                stack.push(i);
+            }
+            else
+            {
+                stack.pop();
+                if(stack.empty())
+                {
+                    stack.push(i);
+                }
+                else
+                {
+                    maxans = Math.max(maxans, i - stack.peek());
+                }
+            }
+        }
+        return maxans;
+    }
+}
+
+
